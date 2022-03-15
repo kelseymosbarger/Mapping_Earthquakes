@@ -18,7 +18,13 @@ let cityData = cities
 // Loop through the cities array and create one marker for each city.
 cityData.forEach(function(city) {
   console.log(city)
-  L.marker(city.location).addTo(map);
+  L.circleMarker(city.location, {
+    radius: city.population/100000,
+    color: "#ffa500",
+    fillColor: '#ffa500'
+  })
+  .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
+  .addTo(map);
  });
 
 // We create the tile layer that will be the background of our map.
@@ -30,5 +36,3 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 // Then we add our 'graymap' tile layer to the map.
 streets.addTo(map);
-
-
