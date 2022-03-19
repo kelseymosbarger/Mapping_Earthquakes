@@ -85,36 +85,37 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-  "Light Navigation": light,
-  "Dark Navigation": dark
+  "Streets": streets,
+  "Satellite": satelliteStreets
 };
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-  center: [30, 30],
-  zoom: 2,
-  layers: [light]
+  center: [43.7, -79.3],
+  zoom: 11,
+  layers: [streets]
 })
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
-let airportData = "https://raw.githubusercontent.com/kelseymosbarger/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/torontoRoutes.json"
+let torontoHoods = "https://raw.githubusercontent.com/kelseymosbarger/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/torontoRoutes.json"
 
 let myStyle = {
+ color: "blue", 
   weight: 2,
-  color: '#ffff66'
+  FillColor: '#ffff66'
 }
 
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
+d3.json(torontoHoods).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
 L.geoJSON(data,{
   style: myStyle, 
   onEachFeature: function (feature, layer) {
-      layer.bindPopup(`<h1>Airline: ${feature.properties.airline}</h1> <hr> <h3>Destination: ${feature.properties.dst}</h3>`)
+      layer.bindPopup(`<h3>Neighborhood: $(feature.properties.AREA_NAME)</h3>`)
   }
 })
   .addTo(map);
