@@ -105,7 +105,7 @@ let torontoHoods = "https://raw.githubusercontent.com/kelseymosbarger/Mapping_Ea
 let myStyle = {
  color: "blue", 
   weight: 2,
-  FillColor: "yellow"
+  fillColor: "yellow"
 }
 
 // Grabbing our GeoJSON data.
